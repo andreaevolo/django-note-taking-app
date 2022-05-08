@@ -30,6 +30,7 @@ nav ul {
     width: 60vw;
     padding: 1rem 2rem;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     transition: height 300ms ease-in-out;
 }
@@ -62,7 +63,7 @@ nav ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 40rem;
+    width: 40rem;
     transition: all 400ms ease-in-out;
 }
 
