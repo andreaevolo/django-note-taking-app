@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/main.css' %}" />
+</head>
+<body>
+    
+    {% include 'notes/includes/navbar.html' %}
+    <main class="container">
+        {% if notes %}
+            {% for note  in notes %}
+                <p class="note">{{note.text}} 
+                    <span class="date">{{ note.pub_date }}</span>
+                    <span class="delete" data-noteid={{note.id}}>Delete</span>
+                </p>
+            {% endfor %}
+        {% else %}
+                <p style="margin: 1rem auto;">There aren't any notes yet. <a style="color:white;font-weight:bold" href="/create">Add a new one</a></p>
+        {% endif %}        
+    </main>
+    <div style="text-align: center">
+        <a class="button--custom" href={% url 'create' %}>Add new note</a>
+    </div>
+
+<script src="{% static 'notes/js/removeOnAnimationsCompleted.js' %}"></script>
+<script src="{% static 'notes/js/alert.js' %}"></script>
+<script src="{% static 'notes/js/app.js' %}"></script>
+</body>
+</html>
