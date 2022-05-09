@@ -14,6 +14,7 @@
 <body>
     
     {% include 'notes/includes/navbar.html' %}
+    <h1>{{ notes_count }}</h1>
     <main class="container">
         {% if notes %}
             {% for note  in notes %}
@@ -26,10 +27,18 @@
                 <p style="margin: 1rem auto;">There aren't any notes yet. <a style="color:white;font-weight:bold" href="/create">Add a new one</a></p>
         {% endif %}        
     </main>
+    <div class="container" id="pagination__controls">
+        
+        {% for btn in pagination_buttons %}
+        <span class="pagination__btn">{{ btn }}</span>
+        {% endfor %}
+        <span class="pagination__btn" id="next">Next ...</span>
+    </div>
     <div style="text-align: center">
         <a class="button--custom" href={% url 'create' %}>Add new note</a>
     </div>
 
+<script src="{% static 'notes/js/pagination.js' %}"></script>
 <script src="{% static 'notes/js/removeOnAnimationsCompleted.js' %}"></script>
 <script src="{% static 'notes/js/alert.js' %}"></script>
 <script src="{% static 'notes/js/app.js' %}"></script>
