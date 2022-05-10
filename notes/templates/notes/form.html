@@ -18,6 +18,11 @@
     <main class="form__container">
         <form method="post" action={% url 'create' %} id="notes__form">
             {% csrf_token %}
+            <label for="{{ form.title.id_for_label }}">Task Title:</label>
+            {{ form.title }}
+            {% for error in form.text.errors  %}
+                <p class="form__error">{{ error }}</p>
+             {% endfor %}
             <label for="{{ form.text.id_for_label }}">Task Note:</label>
             {{form.text}}
              {% for error in form.text.errors  %}
