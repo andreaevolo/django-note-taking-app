@@ -48,7 +48,7 @@ def create_note(request):
             title = form.cleaned_data['title']
             text = form.cleaned_data['text']
             try:
-                Note(text=text).save()
+                Note(title=title, text=text).save()
                 return HttpResponseRedirect('/')
             except:
                 return HttpResponse(status=404)
