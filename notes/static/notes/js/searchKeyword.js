@@ -40,8 +40,11 @@ const updateNotesView = (notes, DOMElement) => {
 const getWords = (element) => {
     const text = element.value;
     const words = text.split(' ');
-
-    filterResultByKeywords(words);
+    console.log(text);
+    if (text) {
+        return filterResultByKeywords(words);
+    }
+    window.location.replace('/?offset=0');
 }
 
 const fetchNotes = (data) => {
@@ -79,7 +82,7 @@ const filterResultByKeywords = (words) => {
 }
 
 searchBar.addEventListener("keyup", delay((e) => {
-    if (e.target.value) {
-        getWords(e.target)
-    }
+
+    getWords(e.target)
+
 }, 200))
