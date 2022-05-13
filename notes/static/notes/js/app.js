@@ -3,7 +3,7 @@ const deleteBtns = document.querySelectorAll(".delete");
 
 const removeNoteFromDOM = (id) => {
     const noteBtn = document.querySelector(`span[data-noteid='${id}']`);
-    noteBtn.parentElement.classList.add("fadeOutBottom");
+    noteBtn.parentElement.parentElement.classList.add("fadeOutBottom");
     removeOnAnimationsCompleted(noteBtn.parentElement);
 }
 

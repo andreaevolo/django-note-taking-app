@@ -45,6 +45,7 @@ def create_note(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
+            title = form.cleaned_data['title']
             text = form.cleaned_data['text']
             try:
                 Note(text=text).save()
