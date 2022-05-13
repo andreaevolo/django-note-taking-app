@@ -1,7 +1,10 @@
+import json
 from django.shortcuts import redirect, render, get_list_or_404, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError, JsonResponse
+from django.db.models import Q
+from django.core import serializers
 from .models import Note
-from .forms import NoteForm
+from .forms import NoteForm, SearchNoteForm
 
 # Create your views here.
 
@@ -14,8 +17,28 @@ def index(request):
     pagination_btns = []
     for btn in range(int(count / pagination_offset)):
         pagination_btns.append(btn+1)
-    context = {'notes': notes, 'pagination_buttons': pagination_btns}
+    context = {'notes': notes, 'pagination_buttons': pagination_btns,
+               'searchInput': SearchNoteForm}
     return render(request, 'notes/index.html', context)
+
+
+def filtred_notes(request):
+    if request.method == 'POST':
+
+        json_res = json.loads(request.body.decode('utf-8'))
+        try:
+            data = json_res['keywords']
+
+            query = Q()
+            for keyword in data:
+                query |= Q(text__contains=keyword)
+            notes = Note.objects.filter(query)
+
+            qs_json = serializers.serialize('json', notes)
+
+            return HttpResponse(qs_json, content_type='application/json', status=200)
+        except Exception:
+            HttpResponseServerError("Invalid Json.")
 
 
 def create_note(request):

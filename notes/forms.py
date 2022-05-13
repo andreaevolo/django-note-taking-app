@@ -12,3 +12,13 @@ class NoteForm(forms.Form):
             2, "Please enter a note at least 2 characters long.")],
         widget=forms.Textarea,
         label='Text Note', max_length=300)
+
+
+class SearchNoteForm(forms.Form):
+    keyword = forms.CharField(validators=[validators.MinValueValidator(1)],
+                              widget=forms.TextInput(
+                                  attrs={'id': 'searchKeyword',
+                                         'placeholder': 'Insert Keyword'},
+    ),
+        label="Search by keyword",
+    )

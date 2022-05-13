@@ -1,12 +1,13 @@
 :root {
-    --primary-color: #a970ff;
+    --primary--color: #a970ff;
     --secondary--color: #18181b;
+    --custom--shadow: 9px 10px 0px 0px var(--secondary--color);
     /*#18181b*/
 }
 
 html,
 body {
-    background-color: var(--primary-color);
+    background-color: var(--primary--color);
     color: white;
     height: auto;
     margin: 0;
@@ -121,7 +122,7 @@ nav ul {
 }
 
 .note .delete {
-    color: var(--primary-color);
+    color: var(--primary--color);
     font-weight: bold;
     cursor: pointer;
     background-color: rgb(255, 255, 255);
@@ -131,6 +132,11 @@ nav ul {
 
 .note .delete:hover {
     text-decoration: underline;
+}
+
+#searchKeyword {
+    background-color: ivory;
+    width: 50vw;
 }
 
 .alert {
@@ -148,7 +154,7 @@ nav ul {
 
 .button--custom {
     background-color: white;
-    color: var(--primary-color);
+    color: var(--primary--color);
     border-radius: 4px;
     padding: 1rem 1.5rem;
     font-weight: bold;
@@ -160,7 +166,7 @@ nav ul {
 
 .button--custom:hover {
     width: 12rem;
-    background: var(--primary-color);
+    background: var(--primary--color);
     border: 1px solid white;
     color: white;
 }

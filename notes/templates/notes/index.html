@@ -14,34 +14,42 @@
 <body>
     
     {% include 'notes/includes/navbar.html' %}
-    <h1>{{ notes_count }}</h1>
-    <main class="container">
-        {% if notes %}
-            {% for note  in notes %}
-            <div class="note">
-                <h2>{{ note.title }}</h2>
-                <p class="note__content">
-                    {{note.text}} 
-                    <span class="date">{{ note.pub_date }}</span>
-                    <span class="delete" data-noteid={{note.id}}>Delete</span>
-                </p>
-            </div>
+    <div class="container">
+        <form>
+            {% csrf_token %}
+            {{ searchInput }}
+        </form>
+
+        <main class="container" id="notes__container">
+            {% if notes %}
+                {% for note  in notes %}
+                <div class="note">
+                    <h2>{{ note.title }}</h2>
+                    <p class="note__content">
+                        {{note.text}} 
+                        <span class="date">{{ note.pub_date }}</span>
+                        <span class="delete" data-noteid={{note.id}}>Delete</span>
+                    </p>
+                </div>
+                {% endfor %}
+            {% else %}
+                    <p style="margin: 1rem auto;">There aren't any notes yet. <a style="color:white;font-weight:bold" href="/create">Add a new one</a></p>
+            {% endif %}        
+        </main>
+        <div class="container" id="pagination__controls">
+            
+            {% for btn in pagination_buttons %}
+            <span class="pagination__btn">{{ btn }}</span>
             {% endfor %}
-        {% else %}
-                <p style="margin: 1rem auto;">There aren't any notes yet. <a style="color:white;font-weight:bold" href="/create">Add a new one</a></p>
-        {% endif %}        
-    </main>
-    <div class="container" id="pagination__controls">
-        
-        {% for btn in pagination_buttons %}
-        <span class="pagination__btn">{{ btn }}</span>
-        {% endfor %}
-        <span class="pagination__btn" id="next">Next ...</span>
-    </div>
-    <div style="text-align: center">
-        <a class="button--custom" href={% url 'create' %}>Add new note</a>
+            <span class="pagination__btn" id="next">Next ...</span>
+        </div>
+        <div style="text-align: center">
+            <a class="button--custom" href={% url 'create' %}>Add new note</a>
+        </div>
     </div>
 
+<script src="{% static 'notes/js/utils/getCSRFToken.js' %}"></script>
+<script src="{% static 'notes/js/searchKeyword.js' %}"></script>
 <script src="{% static 'notes/js/pagination.js' %}"></script>
 <script src="{% static 'notes/js/removeOnAnimationsCompleted.js' %}"></script>
 <script src="{% static 'notes/js/alert.js' %}"></script>

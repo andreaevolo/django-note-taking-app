@@ -7,17 +7,6 @@ const removeNoteFromDOM = (id) => {
     removeOnAnimationsCompleted(noteBtn.parentElement);
 }
 
-const getCSRFToken = () => {
-    const tokenList = document.cookie.split(';');
-    let csrft = '';
-    tokenList.forEach(token => {
-        if (token.startsWith("csrftoken")) {
-            csrft = token.split("=")[1];
-        }
-    })
-    return csrft;
-}
-
 
 const deleteNote = (id) => {
     return fetch(`note/${id}`, {
